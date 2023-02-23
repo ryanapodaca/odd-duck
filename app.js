@@ -14,6 +14,7 @@ let imgTwo = document.getElementById("img-two");
 let imgThree = document.getElementById("img-three");
 
 let resultsBtn = document.getElementById("results-btn");
+// document.querySelector('h3').style.visibility = 'hidden';
 // let resultsList = document.getElementById('results-container');
 
 //Canvas element
@@ -26,7 +27,7 @@ function Product(name, fileExtension = "jpeg") {
   this.image = `img/${name}.${fileExtension}`;
   this.clicks = 0;
   this.views = 0;
-  productArray.push(this);
+  // productArray.push(this);
 }
 
 //Helper functions
@@ -56,13 +57,13 @@ function renderImg() {
 
   imgOne.src = productArray[imgOneIndex].image;
   imgOne.title = productArray[imgOneIndex].name;
-  imgOne.alt = `This an image of ${productArray[imgOneIndex].name}.`;
+  imgOne.alt = `This is an image of ${productArray[imgOneIndex].name}.`;
   imgTwo.src = productArray[imgTwoIndex].image;
   imgTwo.title = productArray[imgTwoIndex].name;
-  imgTwo.alt = `This an image of ${productArray[imgTwoIndex].name}.`;
+  imgTwo.alt = `This is an image of ${productArray[imgTwoIndex].name}.`;
   imgThree.src = productArray[imgThreeIndex].image;
   imgThree.title = productArray[imgThreeIndex].name;
-  imgThree.alt = `This an image of ${productArray[imgThreeIndex].name}.`;
+  imgThree.alt = `This is an image of ${productArray[imgThreeIndex].name}.`;
 
   productArray[imgOneIndex].views++;
   productArray[imgTwoIndex].views++;
@@ -89,9 +90,15 @@ function handleImgClick(event) {
 
   if (rounds === 0) {
     imgContainer.removeEventListener("click", handleImgClick);
-    resultsBtn.addEventListener("click", handleResults); //maybe
+    resultsBtn.addEventListener("click", handleResults);
+    // document.querySelector('h3').style.visibility = 'visible';
+    //local storage
+    let  stringifiedProducts = JSON.stringify(productArray);
+    localStorage.setItem('products', stringifiedProducts);
   }
 }
+
+
 
 function handleResults() {
   if (rounds === 0) {
@@ -144,27 +151,41 @@ function renderChart() {
 
 //Code
 
-let bag = new Product("bag");
-let banana = new Product("banana");
-let bathroom = new Product("bathroom");
-let boots = new Product("boots");
-let breakfast = new Product("breakfast");
-let bubblegum = new Product("bubblegum");
-let chair = new Product("chair");
-let cthulhu = new Product("cthulhu");
-let dogDuck = new Product("dog-duck");
-let dragon = new Product("dragon");
-let pen = new Product("pen");
-let petSweep = new Product("pet-sweep");
-let scissors = new Product("scissors");
-let shark = new Product("shark");
-let sweep = new Product("sweep", "png");
-let tauntaun = new Product("tauntaun");
-let unicorn = new Product("unicorn");
-let usb = new Product("water-can");
-let wineGlass = new Product("wine-glass");
+let retreivedLSProducts = localStorage.getItem('products');
 
-// productArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, wineGlass);
+console.log(retreivedLSProducts);
+
+let parsedProducts = JSON.parse(retreivedLSProducts);
+
+console.log(parsedProducts);
+
+if (retreivedLSProducts){
+  productArray = parsedProducts;
+} else {
+  let bag = new Product("bag");
+  let banana = new Product("banana");
+  let bathroom = new Product("bathroom");
+  let boots = new Product("boots");
+  let breakfast = new Product("breakfast");
+  let bubblegum = new Product("bubblegum");
+  let chair = new Product("chair");
+  let cthulhu = new Product("cthulhu");
+  let dogDuck = new Product("dog-duck");
+  let dragon = new Product("dragon");
+  let pen = new Product("pen");
+  let petSweep = new Product("pet-sweep");
+  let scissors = new Product("scissors");
+  let shark = new Product("shark");
+  let sweep = new Product("sweep", "png");
+  let tauntaun = new Product("tauntaun");
+  let unicorn = new Product("unicorn");
+  let usb = new Product("water-can");
+  let wineGlass = new Product("wine-glass");
+
+  productArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, wineGlass);
+}
+
+
 
 // for (let i = 0; i < productArray.length; i++) {
 //   productArray[i].;
