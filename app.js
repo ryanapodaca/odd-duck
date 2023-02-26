@@ -5,7 +5,7 @@
 let productArray = [];
 let rounds = 25;
 
-//DOM connectivity
+//DOM connectivity 
 
 let imgContainer = document.getElementById("img-container");
 
@@ -14,8 +14,6 @@ let imgTwo = document.getElementById("img-two");
 let imgThree = document.getElementById("img-three");
 
 let resultsBtn = document.getElementById("results-btn");
-// document.querySelector('h3').style.visibility = 'hidden';
-// let resultsList = document.getElementById('results-container');
 
 //Canvas element
 let barGraph = document.getElementById("chart");
@@ -27,7 +25,7 @@ function Product(name, fileExtension = "jpeg") {
   this.image = `img/${name}.${fileExtension}`;
   this.clicks = 0;
   this.views = 0;
-  // productArray.push(this);
+  // productArray.push(this);   this is another way to push the object into the array.
 }
 
 //Helper functions
@@ -40,7 +38,7 @@ function renderImg() {
   // while (imgOneIndex === imgTwoIndex || imgOneIndex === imgThreeIndex || imgTwoIndex === imgThreeIndex) {
   //   imgTwo.src = getRandomIndex();
   //   imgThree.src = getRandomIndex();
-  //  }
+  //  }   I'm keeping this for future reference.
 
   let indexArray = [];
 
@@ -91,13 +89,10 @@ function handleImgClick(event) {
   if (rounds === 0) {
     imgContainer.removeEventListener("click", handleImgClick);
     resultsBtn.addEventListener("click", handleResults);
-    // document.querySelector('h3').style.visibility = 'visible';
-    //local storage
     let  stringifiedProducts = JSON.stringify(productArray);
     localStorage.setItem('products', stringifiedProducts);
   }
 }
-
 
 
 function handleResults() {
@@ -184,12 +179,6 @@ if (retreivedLSProducts){
 
   productArray.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, wineGlass);
 }
-
-
-
-// for (let i = 0; i < productArray.length; i++) {
-//   productArray[i].;
-// }
 
 renderImg();
 
